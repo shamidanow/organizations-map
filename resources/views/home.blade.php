@@ -16,6 +16,12 @@
 
                     You are logged in!
                 </div>
+                
+                <div class="card-body">
+                    <ul>
+                    	<li><a href="/organizations">Organizations list</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
