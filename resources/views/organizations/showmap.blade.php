@@ -22,7 +22,7 @@
     	var myPlacemark = new ymaps.Placemark([
 			{{ $first->getPoint() }}
     	], {
-    		balloonContent: '{{!! $first->comment !!}}'
+    		balloonContent: '{!! $first->comment !!}'
     	}, {
     		preset: 'islands#icon',
     		iconColor: '#ff0000'
