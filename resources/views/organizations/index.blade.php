@@ -17,7 +17,7 @@
             <td><a href="/organizations/{{ $organization->id }}/edit" title="Редактировать">{{ $organization->name }}</a></td>
             <td>{{ $organization->latitude }}</td>
             <td>{{ $organization->longitude }}</td>
-            <td><a href="/organizations/{{ $organization->id }}" title="Просмотр">{{ $organization->comment }}</a></td>
+            <td><a href="/organizations/{{ $organization->id }}" title="Просмотр">{!! $organization->comment !!}</a></td>
             <td>
                 <form method="POST" action="/organizations/{{ $organization->id }}" style="margin-bottom: lem;">
             		@method('DELETE')

@@ -27,7 +27,7 @@
 	<div class="content">
 		<label class="label" for="comment">Комментарий:</label>
 		<div class="control">
-			{{ $organization->comment }}
+			{!! $organization->comment !!}
 		</div>
 	</div>
 	
