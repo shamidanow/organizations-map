@@ -6,18 +6,18 @@
         <tr>
             <th>#</th>
             <th>Наименование организации</th>
-            <th>Широта</th>
-            <th>Долгота</th>
+            <th>Адрес</th>
+            <th>Координаты</th>
             <th>Комментарий</th>
             <th></th>
         </tr>
         @foreach ($organizations as $organization)
         <tr>
             <td>{{ $organization->number }}</td>
-            <td><a href="/organizations/{{ $organization->id }}/edit" title="Редактировать">{{ $organization->name }}</a></td>
-            <td>{{ $organization->latitude }}</td>
-            <td>{{ $organization->longitude }}</td>
-            <td><a href="/organizations/{{ $organization->id }}" title="Просмотр">{!! $organization->comment !!}</a></td>
+            <td><a href="/organizations/{{ $organization->id }}/edit" title="Редактировать">{{ $organization->company_name }}</a></td>
+            <td>{{ $organization->fact_addr }}</td>
+            <td>{{ $organization->fact_addr_coord }}</td>
+            <td><a href="/organizations/{{ $organization->id }}" title="Просмотр">{!! $organization->getComment() !!}</a></td>
             <td>
                 <form method="POST" action="/organizations/{{ $organization->id }}" style="margin-bottom: lem;">
             		@method('DELETE')

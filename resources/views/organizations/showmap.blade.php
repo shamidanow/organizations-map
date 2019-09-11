@@ -10,7 +10,7 @@
     ymaps.ready(init);
     function init() {
     	var myMap = new ymaps.Map("map", {
-    		center: [{{ $first->getPoint() }}],
+    		center: ['{{ $first->fact_addr_coord }}'],
     		zoom: 16
     	}, {
     		searchControlProvider: 'yandex#search'
@@ -18,23 +18,12 @@
      
     	var myCollection = new ymaps.GeoObjectCollection(); 
      
-    	// Добавим метку красного цвета для первой организации из списка
-    	var myPlacemark = new ymaps.Placemark([
-			{{ $first->getPoint() }}
-    	], {
-    		balloonContent: '{!! $first->comment !!}'
-    	}, {
-    		preset: 'islands#icon',
-    		iconColor: '#ff0000'
-    	});
-    	myCollection.add(myPlacemark);
-     
     	// Добавим метки для оставшихся организаций в списке
 		@foreach ($organizations as $organization)
     	var myPlacemark = new ymaps.Placemark([
 			{{ $organization->getPoint() }}
     	], {
-    		balloonContent: '{!! $organization->comment !!}'
+    		balloonContent: '{!! $organization->getComment() !!}'
     	}, {
     		preset: 'islands#icon',
     		iconColor: '#0000ff'

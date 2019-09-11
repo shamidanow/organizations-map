@@ -7,34 +7,34 @@
 		{{ csrf_field() }}
 		
 		<div class="field">
-			<label class="label" for="name">Наименование</label>
+			<label class="label" for="company_name">Наименование</label>
 			
 			<div class="control">
-				<input type="text" class="input" name="name" placeholder="Наименование организации" value="{{ $organization->name }}">
+				<input type="text" class="input" name="company_name" placeholder="Наименование организации" value="{{ $organization->company_name }}">
 			</div>
 		</div>
 		
 		<div class="field">
-			<label class="label" for="latitude">Широта</label>
+			<label class="label" for="fact_addr">Адрес</label>
 			
 			<div class="control">
-				<input type="text" class="input" name="latitude" placeholder="Координаты широты организации" value="{{ $organization->latitude }}">
+				<input type="text" class="input" name="fact_addr" placeholder="Адрес" value="{{ $organization->fact_addr }}">
 			</div>
 		</div>
 		
 		<div class="field">
-			<label class="label" for="longitude">Долгота</label>
+			<label class="label" for="fact_addr_coord">Координаты</label>
 			
 			<div class="control">
-				<input type="text" class="input" name="longitude" placeholder="Координаты долготы организации" value="{{ $organization->longitude }}">
+				<input type="text" class="input" name="fact_addr_coord" placeholder="Координаты" value="{{ $organization->fact_addr_coord }}">
 			</div>
 		</div>
 		
 		<div class="field">
-			<label class="label" for="comment">Комментарий</label>
+			<label class="label" for="site_url">Комментарий</label>
 			
 			<div class="control">
-				<input type="text" class="input" name="comment" placeholder="Комментарий" value="{{ $organization->comment }}">
+				<input type="text" class="input" name="site_url" placeholder="Комментарий" value="{{ $organization->site_url }}">
 			</div>
 		</div>
 		
