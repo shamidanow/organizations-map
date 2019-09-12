@@ -1,0 +1,499 @@
+body, html
+    padding: 0
+    margin: 0
+    width: 100%
+    height: 100%
+    font-family: 'Open Sans', sans-serif
+#map 
+    width: 100%
+    height: 100%
+    
+// .customControl 
+//     display: none
+//     background-color: #fff
+//     padding: 5px
+//     border-radius: 3px
+//     max-width: 315px
+//     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+        
+// .closeButton 
+//     flex-basis: 15px
+//     flex-grow: 0
+//     flex-shrink: 0
+//     padding: 3px
+//     height: 15px
+//     cursor: pointer
+//     background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTQgLjdsLS43LS43TDcgNi4zLjcgMCAwIC43IDYuMyA3IDAgMTMuM2wuNy43TDcgNy43bDYuMyA2LjMuNy0uN0w3LjcgN3oiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==") 50% no-repeat
+//     opacity: 0.3
+        
+// .content 
+//     padding: 5px
+//     max-height: 500px
+//     overflow: auto
+        
+
+// a, a:visited 
+//     color: #04b
+//     text-decoration: none !important
+
+.company
+    padding-left: 0.625rem
+    padding-right: 0.625rem
+    padding-top: 1rem
+    &-block-twocolumns
+        display: flex
+        &__item
+            flex-basis: 50%
+            display: flex
+            flex-direction: column
+    &-additional__block
+        font-size: 0.9rem
+        line-height: 1.25rem
+    &-block-linecolums
+        display: flex
+        border-top: 0.04rem dotted  rgba(0,0,0,.2)
+        border-bottom: 0.04rem dotted  rgba(0,0,0,.2)
+        margin-top: 0.625rem
+        margin-bottom: 0.625rem
+        padding-top: 0.625rem
+        padding-bottom: 0.625rem
+        &__item
+            flex-basis: 33.33%
+            display: flex
+            align-items: center
+            justify-content: center
+            &-icon
+                margin-right: 0.1875rem
+            &-text
+                font-size: 0.9rem
+                line-height: 1.25rem
+            &-value
+                font-size: 0.9rem
+                line-height: 1.25rem
+                margin-right: 0.1875rem
+    &-block-colums
+        display: flex
+        flex-direction: column
+        &__contact-block
+            display: flex
+            margin-top: 0.2875rem
+            margin-bottom: 0.2875rem
+            &__icon
+                height: 1.0625rem
+                width: 1.0625rem
+            &__separator
+                width: 0.8rem
+                margin-left: 0.3875rem
+                margin-right: 0.3875rem
+            &__text
+                font-size: 0.9rem
+            &__icon-vk
+                height: 1.5rem
+                width: 1.5rem
+                margin-right: 0.8rem
+            &__icon-twitter
+                height: 1.5rem
+                width: 1.5rem
+                margin-right: 0.8rem
+            &__icon-instagram
+                height: 1.5rem
+                width: 1.5rem
+.mt15
+    margin-top: 0.95rem           
+
+.company-logo__default
+    background: url('../images/logo.png') no-repeat
+    background-position: center
+    width: 100%
+    background-size: contain
+    height: 100%
+
+$white: rgba(254,255,250,1)
+$grey: #999999
+$black: rgba(48,69,92,0.8)
+  
+.transition
+  transition: all 0.25s ease-in-out
+
+.flipIn
+  animation: flipdown 0.5s ease both
+    
+.no-select
+  -webkit-tap-highlight-color: rgba(0,0,0,0)
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+
+.company-block-dropdown__li-title
+  font-size: 0.875rem
+  letter-spacing: 1px
+  font-weight: bold
+  display: block
+  background-color: $white
+  margin: 0
+  cursor: pointer
+  @extend .no-select
+
+.company-block-dropdown__li-item
+  position: relative
+  overflow-x: hidden
+  max-height: 500px
+  @extend .transition
+  opacity: 1
+  transform: translate( 0 , 0 )  
+  margin-top: 14px
+  z-index: 2
+  display: flex
+  flex-direction: column
+  
+.company-block-dropdown__ul
+  list-style: none
+  perspective: 900
+  padding: 0
+  margin: 0
+  
+.company-block-dropdown__li
+    position: relative
+    padding: 0
+    margin: 0
+    padding-bottom: 0.7rem
+    padding-top: 0.7rem
+    border-top: 1px dotted $grey
+    border-bottom: 1px dotted $grey
+    @extend .flipIn
+      
+    &:nth-of-type(1)
+      animation-delay: 0.5s
+    
+    &:nth-of-type(2)
+      animation-delay: 0.75s
+        
+    &:nth-of-type(3)
+      animation-delay: 1.0s
+    
+    // &:last-of-type
+    //   padding-bottom: 0
+      
+    i
+      position: absolute
+      transform: translate( -6px , 0 )
+      margin-top: 7px
+      right: 0
+      margin-right: 12px
+      
+      &:before , &:after
+        content: ""
+        @extend .transition
+        position: absolute
+        background-color: #000000
+        width: 3px
+        height: 9px
+        
+      &:before
+        transform: translate( -2px , 0 ) rotate( 45deg )
+          
+      &:after
+        transform: translate( 2px , 0 ) rotate( -45deg )
+    
+    input[type=checkbox]
+      position: absolute
+      cursor: pointer
+      width: 100%
+      height: 100%
+      z-index: 1
+      opacity: 0
+      
+      &:checked
+        &~.company-block-dropdown__li-item
+          margin-top: 0
+          max-height: 0
+          opacity: 0
+          transform: translate( 0 , 50% )
+            
+        &~i
+          &:before
+            transform: translate( 2px , 0 ) rotate( 45deg )
+          
+          &:after
+            transform: translate( -2px , 0 ) rotate( -45deg )
+
+@keyframes flipdown
+  0%
+    opacity: 0
+    transform-origin: top center
+    transform: rotateX(-90deg)
+  5%
+    opacity: 1
+  80%
+    transform: rotateX(8deg)
+  83%
+    transform: rotateX(6deg)
+  92%
+    transform: rotateX(-3deg)
+  100%
+    transform-origin: top center
+    transform: rotateX(0deg) 
+
+
+.company-block-dropdown
+    margin-top: 0.7rem
+    &__list-item__info
+      padding-right: 1.1rem
+      display: flex
+      flex-direction: column
+      &-title
+        font-size: 0.9rem
+        font-weight: bold
+        line-height: 1.25rem
+      &-text
+        font-size: 0.8rem
+        line-height: 1.25rem
+    &__list-item__info-rating
+      margin-top: 0.7rem
+      
+      &-title
+        font-weight: bold
+        font-size: 0.8rem
+        line-height: 1.25rem
+      &-info
+        display: flex
+        &__items
+          flex-basis: 50%
+          display: flex
+          flex-direction: column
+          margin: auto
+          &-icon
+            height: 9.5rem
+            width: 9.5rem
+        &__item
+          display: flex
+          align-items: center
+          &-line
+            width: 100%
+            flex-basis: 7%
+            margin-left: 0.2rem
+            margin-right: 0.2rem
+          &-numeral
+            flex-basis: 8%
+          &-svg
+            flex-basis: 7%
+            margin-left: 0.2rem
+            margin-right: 0.2rem
+          &-text
+            flex-basis: 78%
+
+
+
+button.company-block-dropdowm__list-item__info-rating__button-leave
+  font-size: 0.9rem
+  border: 0.04rem solid #999999
+  border-radius: 4px
+  cursor: pointer
+  margin-bottom: 0.5rem
+  margin-top: 1rem
+  width: 100%
+  outline: none
+  line-height: 2rem
+  background: transparent
+
+button.company-block-dropdowm__list-item__info-rating__button-still
+  font-size: 0.9rem
+  border: 0.04rem solid  #999999
+  border-radius: 4px
+  cursor: pointer
+  width: 100%
+  line-height: 2rem
+  background: transparent
+
+.company-block-dropdown__li-item::-webkit-scrollbar-track
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+    border-radius: 25px
+    background-color: #F5F5F5
+
+
+.company-block-dropdown__li-item::-webkit-scrollbar
+    width: 4px
+    background-color: #F5F5F5
+
+.company-block-dropdown__li-item::-webkit-scrollbar-thumb
+    border-radius: 25px
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3)
+    background-color: #000000
+.company-block-colums__item-icon
+  height: 17px
+  width: 17px
+  margin-right: 0.5rem
+button.company-block-colums__item
+  background: transparent
+  border: none
+  outline: none
+  margin-top: 1rem
+  text-align: left
+  width: 50%
+  cursor: pointer
+.company-block-colums__item-block
+  display: flex
+.company-block-coluns__item-text
+  font-size: 0.9rem
+  line-height: 1.25rem
+button.company-block-dropdown__list-item__info__similar-companies
+  display: flex
+  align-items: center
+.company-block-dropdown__list-item__info__similar-companies__logo img
+  height: 1.75rem
+  width: 1.75rem
+span.company-block-dropdown__list-item__info__similar-companies__text
+  font-weight: bold
+  font-size: 0.9rem
+  line-height: 1.25rem
+.company-block-dropdown__list-item__info__similar-companies__logo
+  margin-right: 0.5rem
+  margin-left: 0.5rem
+button.company-block-dropdown__list-item__info__similar-companies
+  border: 0.04rem solid #999999
+  border-radius: 4px
+  cursor: pointer
+  margin-bottom: 0.5rem
+  width: 100%
+  background: transparent
+  outline: none
+
+.company-block-dropdown__list-item__info__li-title__icon
+  height: 17px
+  width: 17px
+  margin-right: 0.5rem
+
+.company-block-dropdown__list-item__info__li-title
+  display: flex
+  font-size: 0.8rem
+  letter-spacing: 1px
+  align-items: center
+  font-weight: bold
+  background-color: $white
+  margin: 0
+  cursor: pointer
+  @extend .no-select
+
+.company-block-dropdown__list-item__info__li-item__text
+  font-size: 0.75rem
+  letter-spacing: 1px
+  display: block
+  background-color: $white
+  margin: 0
+  margin-top: 0.5rem  
+  cursor: pointer
+  border-radius: 4px
+  border: 0.04rem solid #999999
+  padding-top: 0.4rem
+  padding-bottom: 0.4rem
+  margin-bottom: 0.4rem
+  margin-right: 0.4rem
+  padding-left: 0.4rem
+
+.company-block-dropdown__list-item__info__li-item
+  position: relative
+  overflow-x: hidden
+  max-height: 500px
+  @extend .transition
+  opacity: 1
+  transform: translate( 0 , 0 )  
+  margin-top: 14px
+  z-index: 2
+  display: flex
+  flex-direction: column
+  
+.company-block-dropdown__list-item__info__ul
+  list-style: none
+  perspective: 900
+  padding: 0
+  margin: 0
+  margin-bottom: 0.5rem
+  
+.company-block-dropdown__list-item__info__li
+    position: relative
+    padding: 0
+    margin: 0
+    padding-top: 0.5rem
+    padding-left: 0.5rem
+    padding-bottom: 0.5rem
+    border: 0.04rem solid  #999999
+    border-radius: 4px
+    cursor: pointer
+    width: 100%
+    @extend .flipIn
+      
+    &:nth-of-type(1)
+      animation-delay: 0.5s
+    
+    &:nth-of-type(2)
+      animation-delay: 0.75s
+        
+    &:nth-of-type(3)
+      animation-delay: 1.0s
+    
+    // &:last-of-type
+    //   padding-bottom: 0
+    
+    //  i
+    //   position: absolute
+    //   transform: translate( -6px , 0 )
+    //   margin-top: 7px
+    //   right: 0
+    //   margin-right: 12px
+      
+    //   &:before , &:after
+    //     content: ""
+    //     @extend .transition
+    //     position: absolute
+    //     background-color: #000000
+    //     width: 3px
+    //     height: 9px
+        
+    //   &:before
+    //     transform: translate( -2px , 0 ) rotate( 45deg )
+          
+    //   &:after
+    //     transform: translate( 2px , 0 ) rotate( -45deg )
+
+    input[type=checkbox]
+      position: absolute
+      cursor: pointer
+      width: 100%
+      height: 100%
+      z-index: 1
+      opacity: 0
+      
+      &:checked
+        &~.company-block-dropdown__list-item__info__li-item
+          margin-top: 0
+          max-height: 0
+          opacity: 0
+          transform: translate( 0 , 50% )
+            
+        &~i
+          &:before
+            transform: translate( 2px , 0 ) rotate( 45deg )
+          
+          &:after
+            transform: translate( -2px , 0 ) rotate( -45deg )
+
+@keyframes flipdown
+  0%
+    opacity: 0
+    transform-origin: top center
+    transform: rotateX(-90deg)
+  5%
+    opacity: 1
+  80%
+    transform: rotateX(8deg)
+  83%
+    transform: rotateX(6deg)
+  92%
+    transform: rotateX(-3deg)
+  100%
+    transform-origin: top center
+    transform: rotateX(0deg) 

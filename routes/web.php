@@ -25,5 +25,11 @@ Route::get('/organizations/updatecoords', 'OrganizationsController@updateCoords'
 
 Route::get('/organizations/getcoordsbyaddr/{addr}', 'OrganizationsController@getCoordsByAddr');
 
+Route::get('/organizations/searchs/{name}', 'OrganizationsController@searchs');
+
+Route::get('/organizations/search/{address}/{name}', 'OrganizationsController@search');
+
+Route::get('/organizations/searched', 'OrganizationsController@searched');
+
 Route::resource('/organizations', 'OrganizationsController');
 
