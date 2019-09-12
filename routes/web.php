@@ -23,5 +23,7 @@ Route::get('/organizations/showmap', 'OrganizationsController@showMap');
 
 Route::get('/organizations/updatecoords', 'OrganizationsController@updateCoords');
 
+Route::get('/organizations/getcoordsbyaddr/{addr}', 'OrganizationsController@getCoordsByAddr');
+
 Route::resource('/organizations', 'OrganizationsController');
 

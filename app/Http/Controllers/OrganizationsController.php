@@ -116,7 +116,7 @@ class OrganizationsController extends Controller
             'company_name' => ['required', 'min:3'],
             'fact_addr' => 'required',
             'fact_addr_coord' => 'required',
-            'site_url' => 'required'
+            'site_url' => ''
         ]);
     }
     
@@ -133,54 +133,58 @@ class OrganizationsController extends Controller
     }
     
     public function updateCoords() {
-        $user = \Auth::user();
-        
         // Выборка данных из таблицы
-        $addresses = Organization::all();
-        
-        // Общее количество адресов и количество адресов, в обработке которых произошла ошибка
-        $countGeocode = $countGeocodeFault = 0;
+        $organizations = Organization::all();
         
         // Обработка адресов
-        $result = '<table style="width:600px">';
-        foreach ($addresses as $address) {
-            if ($address->fact_addr != "" 
-                && $address->fact_addr != "-" 
-                && $address->fact_addr_coord == null) 
-            {
-                $countGeocode++;
-                
-                // Обращение к http-геокодеру
-                $xml = simplexml_load_file('https://geocode-maps.yandex.ru/1.x/?geocode='.urlencode("г.Уфа, ".$address->fact_addr).'&key='.$user->api_key.'&results=1');
-                
-                // Если геокодировать удалось, то записываем в БД
-                $found = $xml->GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found;
-                
-                if ($found > 0) {
-                    $coords = str_replace(' ', ',', $xml->GeoObjectCollection->featureMember->GeoObject->Point->pos);
-                    list($lo, $lu) = explode(",", $coords);
-                    $coords = $lu.",".$lo;
-                    $result .= '<tr><td>'.$address->fact_addr.'</td><td>'.$coords.'</td></tr>';
-                    $address->update(['fact_addr_coord' => $coords]);
-                } else {
-                    $result .= '<tr style="color:red"><td>'.$address->fact_addr.'</td><td>ошибка</td></tr>';
-                    $countGeocodeFault++;
-                }
-            }
+        $result = '<table>';
+        foreach ($organizations as $organization) {
+            $coords = $this->updateCoordsByOrg($organization);
+            $result .= '<tr><td>'.$organization->company_name.'</td><td>'.$organization->fact_addr.'</td><td>'.$coords.'</td></tr>';
         }
         $result .= '</table>';
         
         // Вывод результата
         echo $result;
+    }
+    
+    public function updateCoordsByOrg(Organization $organization) {
+        $user = \Auth::user();
         
-        // Вывод общего количество прогеокодированных результатов
-        if ($countGeocode) {
-            echo '<div style="margin-top:1em">Всего обработано адресов: '.$countGeocode.'</div>';
-            if ($countGeocodeFault) {
-                echo '<div style="color:red">Не удалось прогеокодировать: '.$countGeocodeFault.'</div>';
+        $coords = null;
+        if ($organization->fact_addr != "" && $organization->fact_addr != "-" && $organization->fact_addr_coord == null) {
+            // Обращение к http-геокодеру
+            $xml = simplexml_load_file('https://geocode-maps.yandex.ru/1.x/?geocode='.urlencode("г.Уфа, ".$organization->fact_addr).'&key='.$user->api_key.'&results=1');
+            
+            // Если геокодировать удалось, то записываем в БД
+            $found = $xml->GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found;
+            if ($found > 0) {
+                $coords = str_replace(' ', ',', $xml->GeoObjectCollection->featureMember->GeoObject->Point->pos);
+                list($lo, $lu) = explode(",", $coords);
+                $coords = $lu.",".$lo;
+                $organization->update(['fact_addr_coord' => $coords]);
             }
-        } else {
-            echo '<div>Таблица с адресами пуста.</div>';
         }
+        
+        return $coords;
+    }
+    
+    public function getCoordsByAddr($factAddr) {
+        $user = \Auth::user();
+        $coords = null;
+        if ($factAddr != "" && $factAddr != "-") {
+            // Обращение к http-геокодеру
+            $xml = simplexml_load_file('https://geocode-maps.yandex.ru/1.x/?geocode='.urlencode("г.Уфа, ".$factAddr).'&key='.$user->api_key.'&results=1');
+            
+            // Если геокодировать удалось, то записываем в БД
+            $found = $xml->GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found;
+            if ($found > 0) {
+                $coords = str_replace(' ', ',', $xml->GeoObjectCollection->featureMember->GeoObject->Point->pos);
+                list($lo, $lu) = explode(",", $coords);
+                $coords = $lu.",".$lo;
+            }
+        }
+        
+        return $coords;
     }
 }
