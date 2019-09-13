@@ -914,7 +914,7 @@
         	@foreach ($organizations as $organization)
             {
                 coords: [{{ $organization->getPoint() ?? "" }}],
-                text: '{!! $organization->getComment() ?? "" !!}',
+                text: '{!! htmlentities($organization->getComment(), ENT_QUOTES, "UTF-8", false) ?? "" !!}',
                 hintContent: 'Улица Адмирала Макарова'
             },
             @endforeach
